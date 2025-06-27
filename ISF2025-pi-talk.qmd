@@ -39,7 +39,109 @@ library(shape)
 
 ## Nonparametric forecasting
 
+\begin{block}{}
+$$
+ y_t = f(\bm{a}_{t}, \bm{a}_{t-1}, \dots,\bm{a}_{t-s}, y_{t-1},\dots,y_{t-k}) + \varepsilon_{t},
+$$
+\end{block}
+
+\begin{itemize}
+  \item \small \color{black} $y_{t}$ -- \color{violet} observed response at time $t$
+  \item \small \color{black} $f$ -- \color{violet} arbitrary function
+  \item \small \color{black} $\bm{a}_{t}$ -- \color{violet} vector of exogenous variables at time $t$
+  \item \small \color{black} $\varepsilon_{t}$ -- \color{violet} stationary error with mean zero and constant variance $\sigma^2$. 
+\end{itemize}
+
+\pause
+
+We also define:
+
+\begin{itemize}
+  \item \small \color{black} $\bm{z}_{t} = (y_{t}, \bm{x}_{t})$ -- \color{violet} observation at time $t$
+  \item \small \color{black} $\bm{x}_{t} = (\bm{a}_{t}, \bm{a}_{t-1}, \dots,\bm{a}_{t-s}, y_{t-1},\dots,y_{t-k})$ -- \color{violet} vector of all predictors at time $t$.
+  \item \small \color{black} $\hat{y}_{t} = \hat{f}(\bm{x}_{t})$  -- \color{violet} estimated model
+  \item \small \color{black} $e_{t} = y_{t} - \hat{y}_{t}$  -- \color{violet} model residuals
+\end{itemize}
+
+
+
 ## Sparse multiple index (SMI) model
+
+\begin{block}{}
+$$y_{i} = \beta_{0} + \sum_{j = 1}^{p}g_{j}(\bm{\alpha}_{j}^{T}\bm{x}_{ij}) + \sum_{k = 1}^{d}f_{k}(w_{ik}) + \bm{\theta}^{T}\bm{u}_{i} + \varepsilon_{i}, \quad i = 1, \dots, n,$$
+\end{block}
+
+\begin{itemize}
+  \item \small \color{black} $y_{i}$ -- \color{violet} univariate response
+  \item \small \color{black} $\bm{x}_{ij} \in \mathbb{R}^{\ell_{j}}$, $j = 1, \dots, p$ -- \color{violet} $p$ subsets of predictors entering indices
+  \item \small \color{black} $\bm{\alpha}_{j}$ -- \color{violet} $\ell_{j}$-dimensional vectors of index coefficients
+  \item \small \color{black} $g_{j}, f_{k}$ -- \color{violet} smooth nonlinear functions
+  \item \small \color{black} Additional predictors :
+    \begin{itemize}
+      \item \small $w_{ik}$  --   \color{violet} nonlinear
+      \item \small \color{black} $\bm{u}_{i}$  --   \color{violet} linear
+    \end{itemize}
+\end{itemize}
+
+
+## Sparse multiple index (SMI) model
+
+\begin{block}{}
+$$y_{i} = \beta_{0} + \sum_{j = 1}^{p}g_{j}(\bm{\alpha}_{j}^{T}\bm{x}_{ij}) + \sum_{k = 1}^{d}f_{k}(w_{ik}) + \bm{\theta}^{T}\bm{u}_{i} + \varepsilon_{i}, \quad i = 1, \dots, n,$$
+\end{block}
+
+\begin{itemize}
+  \item \small \color{black} $y_{i}$ -- \color{violet} univariate response
+  \item \small \color{black} $\bm{x}_{ij} \in \mathbb{R}^{\ell_{j}}$, $j = 1, \dots, p$ -- \color{violet} $p$ subsets of predictors entering indices
+  \item \small \color{black} $\bm{\alpha}_{j}$ -- \color{violet} $\ell_{j}$-dimensional vectors of index coefficients
+  \item \small \color{black} $g_{j}, f_{k}$ -- \color{violet} smooth nonlinear functions
+  \item \small \color{black} Additional predictors :
+    \begin{itemize}
+      \item \small $w_{ik}$  --   \color{violet} nonlinear 
+      \item \small \color{black} $\bm{u}_{i}$  --   \color{violet} linear
+    \end{itemize}
+\end{itemize}
+
+\begin{textblock}{5.5}(9, 6.3)
+\fontsize{11}{12}\sf
+\begin{alertblock}{}
+\small Allow elements equal to zero in $\bm{\alpha}_{j}$ -- "Sparse"
+\end{alertblock}
+\end{textblock}
+
+
+## Sparse multiple index (SMI) model
+
+\begin{block}{}
+$$y_{i} = \beta_{0} + \sum_{j = 1}^{p}g_{j}(\bm{\alpha}_{j}^{T}\bm{x}_{ij}) + \sum_{k = 1}^{d}f_{k}(w_{ik}) + \bm{\theta}^{T}\bm{u}_{i} + \varepsilon_{i}, \quad i = 1, \dots, n,$$
+\end{block}
+
+\begin{itemize}
+  \item \small \color{black} $y_{i}$ -- \color{violet} univariate response
+  \item \small \color{black} $\bm{x}_{ij} \in \mathbb{R}^{\ell_{j}}$, $j = 1, \dots, p$ -- \color{violet} $p$ subsets of predictors entering indices
+  \item \small \color{black} $\bm{\alpha}_{j}$ -- \color{violet} $\ell_{j}$-dimensional vectors of index coefficients
+  \item \small \color{black} $g_{j}, f_{k}$ -- \color{violet} smooth nonlinear functions
+  \item \small \color{black} Additional predictors :
+    \begin{itemize}
+      \item \small $w_{ik}$  --   \color{violet} nonlinear 
+      \item \small \color{black} $\bm{u}_{i}$  --   \color{violet} linear
+    \end{itemize}
+\end{itemize}
+
+\begin{textblock}{5.5}(9, 6)
+\fontsize{11}{12}\sf
+\begin{alertblock}{}
+\scriptsize Both "p" and the predictor grouping among indices are unknown.
+\end{alertblock}
+\end{textblock} 
+
+\begin{textblock}{5.5}(9, 7)
+\fontsize{11}{12}\sf
+\begin{alertblock}{}
+\scriptsize Overlapping of predictors among indices is not allowed.
+\end{alertblock}
+\end{textblock} 
+
 
 ## Benchmarks
 
