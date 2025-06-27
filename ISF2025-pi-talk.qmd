@@ -33,8 +33,7 @@ library(lubridate)
 library(cowplot)
 library(kableExtra)
 library(feasts)
-library(tikzDevice)
-library(shape)
+library(patchwork)
 ```
 
 ## Nonparametric forecasting
@@ -145,6 +144,26 @@ $$y_{i} = \beta_{0} + \sum_{j = 1}^{p}g_{j}(\bm{\alpha}_{j}^{T}\bm{x}_{ij}) + \s
 
 ## Benchmarks
 
+\begin{itemize}
+  \item \color{violet} Nonparametric additive model with backward elimination (Backward):
+  \begin{itemize}
+    \item No linear combinations (indices)
+    \item Fully additive \newline
+  \end{itemize}
+  \pause
+  \item \color{violet} Groupwise Additive Index Model (GAIM):
+  \begin{itemize}
+    \item Predefined predictor groups
+    \item No overlapping predictors among groups \newline
+  \end{itemize}
+  \pause
+  \item \color{violet} Projection Pursuit Regression model (PPR):
+  \begin{itemize}
+    \item All predictors enter all indices
+  \end{itemize}
+\end{itemize}
+
+
 ## Forecast uncertainty
 
 \begin{itemize}
@@ -165,6 +184,22 @@ where
   \item Main issue:
   \begin{itemize}
     \item \small \color{blue} Difficult to analytically calculate $h$-step forecast variances for $h > 1$
+  \end{itemize}
+\end{itemize}
+
+
+## Block bootstrap
+
+\begin{itemize}
+  \item Resampling from empirical distribution of historical model residuals \color{violet} ${\rightarrow}$ Bootstrapping \newline
+  \pause
+  \item \color{black} Randomly resample blocks from the historical model residuals, and join together \alert{${\rightarrow}$ Block Bootstrapping} 
+  \item Retains serial correlation in the data 
+  \pause
+  \item \color{violet} block length:
+  \begin{itemize}
+    \item Long enough to capture autocorrelation patterns
+    \item Short enough to construct sufficient number of blocks
   \end{itemize}
 \end{itemize}
 
@@ -406,6 +441,167 @@ dataSummer |>
 \end{textblock}
 
 
+## Mean coverage
+
+```{r}
+#| echo: false
+#| message: false
+
+heat_cov_data_smimodel_ppr <- readRDS(here::here("results/heat_smimodel_ppr_cov_plotdata_combined_chp3_smi.rds"))
+heat_cov_data_backward <- readRDS(here::here("results/heat_backward_cov_plotdata_combined_chp3_final_corrected.rds"))
+heat_cov_data_gaim <- readRDS(here::here("results/heat_gaim_cov_plotdata_combined_chp3_final_corrected.rds"))
+heat_cov_data_ppr <- readRDS(here::here("results/heat_ppr_cov_plotdata_combined_chp3_final_corrected.rds"))
+methods <- c("BB", "SCP", "WSCP", "ACP", "CB")
+cols <- c(
+  "BB" = "#CC79A7",
+  "SCP" = "#0072B2",
+  "WSCP" = "#009E73",
+  "ACP" = "#D55E00",
+  "CB" = "black"
+)
+
+p1 <- heat_cov_data_smimodel_ppr |>
+  mutate(method = factor(method, levels = methods)) |>
+  ggplot(aes(x = horizon, y = coverage, group = method, colour = method)) +
+  geom_line(linewidth = 0.4, alpha = 0.8) +
+  scale_colour_manual(values = cols) +
+  geom_hline(yintercept = 0.95, linetype = "dashed", colour = "gray") +
+  xlab("Forecast horizon") +
+  ylab("Mean coverage") +
+  ylim(c(0.75, 1.00)) +
+  ggtitle("SMI") +
+  theme_bw() +
+  theme(axis.title.x = element_blank()) +
+  scale_x_discrete(breaks = seq(1, 92, by = 5))
+
+p2 <- heat_cov_data_backward |>
+  mutate(method = factor(method, levels = methods)) |>
+  ggplot(aes(x = horizon, y = coverage, group = method, colour = method)) +
+  geom_line(linewidth = 0.4, alpha = 0.8) +
+  scale_colour_manual(values = cols) +
+  geom_hline(yintercept = 0.95, linetype = "dashed", colour = "gray") +
+  xlab("Forecast horizon") +
+  ylab("Mean coverage") +
+  ylim(c(0.75, 1.00)) +
+  ggtitle("Backward") +
+  theme_bw() +
+  theme(axis.title.x = element_blank(),
+        axis.title.y = element_blank()) +
+  scale_x_discrete(breaks = seq(1, 92, by = 5))
+
+p3 <- heat_cov_data_gaim |>
+  mutate(method = factor(method, levels = methods)) |>
+  ggplot(aes(x = horizon, y = coverage, group = method, colour = method)) +
+  geom_line(linewidth = 0.4, alpha = 0.8) +
+  scale_colour_manual(values = cols) +
+  geom_hline(yintercept = 0.95, linetype = "dashed", colour = "gray") +
+  xlab("Forecast horizon") +
+  ylab("Mean coverage") +
+  ylim(c(0.75, 1.00)) +
+  ggtitle("GAIM") +
+  theme_bw() +
+  scale_x_discrete(breaks = seq(1, 92, by = 5))
+
+p4 <- heat_cov_data_ppr |>
+  mutate(method = factor(method, levels = methods)) |>
+  ggplot(aes(x = horizon, y = coverage, group = method, colour = method)) +
+  geom_line(linewidth = 0.4, alpha = 0.8) +
+  scale_colour_manual(values = cols) +
+  geom_hline(yintercept = 0.95, linetype = "dashed", colour = "gray") +
+  xlab("Forecast horizon") +
+  ylab("Mean coverage") +
+  ylim(c(0.75, 1.00)) +
+  ggtitle("PPR") +
+  theme_bw() +
+  theme(axis.title.y = element_blank()) +
+  scale_x_discrete(breaks = seq(1, 92, by = 5))
+
+patchwork <- (p1 + p2) / (p3 + p4) & theme(legend.position = "bottom", 
+                                           #legend.box = "vertical",
+                                           legend.title = element_blank(),
+                                           axis.text.x = element_text(size = 7),
+                                           axis.title = element_text(size = 8),
+                                           title = element_text(size = 8))
+patchwork +
+  plot_layout(guides = "collect")
+
+```
+
+
+## Mean width
+
+```{r}
+#| echo: false
+#| message: false
+
+heat_width_data_smimodel_ppr <- readRDS(here::here("results/heat_smimodel_ppr_width_plotdata_combined_chp3_smi.rds"))
+heat_width_data_backward <- readRDS(here::here("results/heat_backward_width_plotdata_combined_chp3_final_corrected.rds"))
+heat_width_data_gaim <- readRDS(here::here("results/heat_gaim_width_plotdata_combined_chp3_final_corrected.rds"))
+heat_width_data_ppr <- readRDS(here::here("results/heat_ppr_width_plotdata_combined_chp3_final_corrected.rds"))
+
+p5 <- heat_width_data_smimodel_ppr |>
+  mutate(method = factor(method, levels = methods)) |>
+  ggplot(aes(x = horizon, y = width, group = method, colour = method)) +
+  geom_line(linewidth = 0.4, alpha = 0.8) +
+  scale_colour_manual(values = cols) +
+  xlab("Forecast horizon") +
+  ylab("Mean width") +
+  ylim(c(30, 80)) +
+  ggtitle("SMI-P") +
+  theme_bw() +
+  theme(axis.title.x = element_blank()) +
+  scale_x_discrete(breaks = seq(1, 92, by = 5))
+
+p6 <- heat_width_data_backward |>
+  mutate(method = factor(method, levels = methods)) |>
+  ggplot(aes(x = horizon, y = width, group = method, colour = method)) +
+  geom_line(linewidth = 0.4, alpha = 0.8) +
+  scale_colour_manual(values = cols) +
+  xlab("Forecast horizon") +
+  ylab("Mean width") +
+  ylim(c(30, 80)) +
+  ggtitle("Backward") +
+  theme_bw() +
+  theme(axis.title.x = element_blank(),
+        axis.title.y = element_blank()) +
+  scale_x_discrete(breaks = seq(1, 92, by = 5))
+
+p7 <- heat_width_data_gaim |>
+  mutate(method = factor(method, levels = methods)) |>
+  ggplot(aes(x = horizon, y = width, group = method, colour = method)) +
+  geom_line(linewidth = 0.4, alpha = 0.8) +
+  scale_colour_manual(values = cols) +
+  xlab("Forecast horizon") +
+  ylab("Mean width") +
+  ylim(c(30, 80)) +
+  ggtitle("GAIM") +
+  theme_bw() +
+  scale_x_discrete(breaks = seq(1, 92, by = 5))
+
+p8 <- heat_width_data_ppr |>
+  mutate(method = factor(method, levels = methods)) |>
+  ggplot(aes(x = horizon, y = width, group = method, colour = method)) +
+  geom_line(linewidth = 0.4, alpha = 0.8) +
+  scale_colour_manual(values = cols) +
+  xlab("Forecast horizon") +
+  ylab("Mean width") +
+  ylim(c(30, 80)) +
+  ggtitle("PPR") +
+  theme_bw() +
+  theme(axis.title.y = element_blank()) +
+  scale_x_discrete(breaks = seq(1, 92, by = 5))
+
+patchwork2 <- (p5 + p6) / (p7 + p8) & theme(legend.position = "bottom", 
+                                           #legend.box = "vertical",
+                                           legend.title = element_blank(),
+                                           axis.text.x = element_text(size = 7),
+                                           axis.title = element_text(size = 8),
+                                           title = element_text(size = 8))
+patchwork2 +
+  plot_layout(guides = "collect")
+```
+
+
 ## Conclusion
 
 ::: {.callout-note}
@@ -425,6 +621,34 @@ dataSummer |>
     \item \small Hyper-parameter choices
   \end{itemize}
 :::
+
+
+## R Package - smimodel
+
+\placefig{11.7}{2.2}{width=4cm}{hex-large}
+
+\begin{textblock}{10.2}(1, 2.2)
+\fontsize{12}{14}\sf
+\begin{block}{}
+  \begin{itemize}
+    \item Block bootstrap
+    \begin{itemize}
+      \item \color{violet} \textbf{bb\_cvforecast()} \newline
+    \end{itemize}
+    \item Conformal bootstrap
+    \begin{itemize}
+      \item \color{violet} \textbf{cb\_cvforecast()} \newline
+    \end{itemize}
+  \end{itemize}
+\end{block}
+\end{textblock}
+
+\begin{textblock}{10.2}(1, 6)
+\fontsize{11}{12}\sf
+\begin{alertblock}{}
+ \color{blue} \hspace*{0.8cm} \href{https://github.com/nuwani-palihawadana/smimodel}{github.com/nuwani-palihawadana/smimodel}
+\end{alertblock}
+\end{textblock}
 
 
 

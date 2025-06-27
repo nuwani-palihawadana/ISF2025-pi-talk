@@ -299,6 +299,24 @@ $$y_{i} = \beta_{0} + \sum_{j = 1}^{p}g_{j}(\bm{\alpha}_{j}^{T}\bm{x}_{ij}) + \s
 
 \begin{frame}{Benchmarks}
 \phantomsection\label{benchmarks}
+\begin{itemize}
+  \item \color{violet} Nonparametric additive model with backward elimination (Backward):
+  \begin{itemize}
+    \item No linear combinations (indices)
+    \item Fully additive \newline
+  \end{itemize}
+  \pause
+  \item \color{violet} Groupwise Additive Index Model (GAIM):
+  \begin{itemize}
+    \item Predefined predictor groups
+    \item No overlapping predictors among groups \newline
+  \end{itemize}
+  \pause
+  \item \color{violet} Projection Pursuit Regression model (PPR):
+  \begin{itemize}
+    \item All predictors enter all indices
+  \end{itemize}
+\end{itemize}
 \end{frame}
 
 \begin{frame}{Forecast uncertainty}
@@ -327,6 +345,22 @@ where
 
 \begin{frame}{Block bootstrap}
 \phantomsection\label{block-bootstrap}
+\begin{itemize}
+  \item Resampling from empirical distribution of historical model residuals \color{violet} ${\rightarrow}$ Bootstrapping \newline
+  \pause
+  \item \color{black} Randomly resample blocks from the historical model residuals, and join together \alert{${\rightarrow}$ Block Bootstrapping} 
+  \item Retains serial correlation in the data 
+  \pause
+  \item \color{violet} block length:
+  \begin{itemize}
+    \item Long enough to capture autocorrelation patterns
+    \item Short enough to construct sufficient number of blocks
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Block bootstrap}
+\phantomsection\label{block-bootstrap-1}
 \placefig{1.8}{2.5}{width=12cm}{bbsplit}
 \end{frame}
 
@@ -395,9 +429,19 @@ where
 \end{textblock}
 \end{frame}
 
+\begin{frame}{Mean coverage}
+\phantomsection\label{mean-coverage}
+\includegraphics{ISF2025-pi-talk_files/figure-beamer/unnamed-chunk-1-1.pdf}
+\end{frame}
+
+\begin{frame}{Mean width}
+\phantomsection\label{mean-width}
+\includegraphics{ISF2025-pi-talk_files/figure-beamer/unnamed-chunk-2-1.pdf}
+\end{frame}
+
 \begin{frame}{Conclusion}
 \phantomsection\label{conclusion}
-\begin{tcolorbox}[enhanced jigsaw, toprule=.15mm, breakable, opacityback=0, bottomrule=.15mm, colframe=quarto-callout-note-color-frame, colback=white, toptitle=1mm, opacitybacktitle=0.6, arc=.35mm, rightrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{\color{violet} Summary of Results (work-in-progress):}, bottomtitle=1mm, left=2mm, coltitle=black, titlerule=0mm, colbacktitle=quarto-callout-note-color!10!white, leftrule=.75mm]
+\begin{tcolorbox}[enhanced jigsaw, coltitle=black, colbacktitle=quarto-callout-note-color!10!white, toprule=.15mm, breakable, bottomtitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{\color{violet} Summary of Results (work-in-progress):}, left=2mm, opacitybacktitle=0.6, rightrule=.15mm, colback=white, toptitle=1mm, arc=.35mm, leftrule=.75mm, bottomrule=.15mm, colframe=quarto-callout-note-color-frame, opacityback=0, titlerule=0mm]
 
 \begin{itemize}
     \item \textbf{Block Bootstrap} -- Under-coverage; too narrow
@@ -406,7 +450,7 @@ where
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, toprule=.15mm, breakable, opacityback=0, bottomrule=.15mm, colframe=quarto-callout-warning-color-frame, colback=white, toptitle=1mm, opacitybacktitle=0.6, arc=.35mm, rightrule=.15mm, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{\color{violet} Limitations:}, bottomtitle=1mm, left=2mm, coltitle=black, titlerule=0mm, colbacktitle=quarto-callout-warning-color!10!white, leftrule=.75mm]
+\begin{tcolorbox}[enhanced jigsaw, coltitle=black, colbacktitle=quarto-callout-warning-color!10!white, toprule=.15mm, breakable, bottomtitle=1mm, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{\color{violet} Limitations:}, left=2mm, opacitybacktitle=0.6, rightrule=.15mm, colback=white, toptitle=1mm, arc=.35mm, leftrule=.75mm, bottomrule=.15mm, colframe=quarto-callout-warning-color-frame, opacityback=0, titlerule=0mm]
 
 \begin{itemize}
     \item \small Test set is not long enough for larger forecast horizons
@@ -414,6 +458,34 @@ where
   \end{itemize}
 
 \end{tcolorbox}
+\end{frame}
+
+\begin{frame}{R Package - smimodel}
+\phantomsection\label{r-package---smimodel}
+\placefig{11.7}{2.2}{width=4cm}{hex-large}
+
+\begin{textblock}{10.2}(1, 2.2)
+\fontsize{12}{14}\sf
+\begin{block}{}
+  \begin{itemize}
+    \item Block bootstrap
+    \begin{itemize}
+      \item \color{violet} \textbf{bb\_cvforecast()} \newline
+    \end{itemize}
+    \item Conformal bootstrap
+    \begin{itemize}
+      \item \color{violet} \textbf{cb\_cvforecast()} \newline
+    \end{itemize}
+  \end{itemize}
+\end{block}
+\end{textblock}
+
+\begin{textblock}{10.2}(1, 6)
+\fontsize{11}{12}\sf
+\begin{alertblock}{}
+ \color{blue} \hspace*{0.8cm} \href{https://github.com/nuwani-palihawadana/smimodel}{github.com/nuwani-palihawadana/smimodel}
+\end{alertblock}
+\end{textblock}
 \end{frame}
 
 \begin{frame}{}
