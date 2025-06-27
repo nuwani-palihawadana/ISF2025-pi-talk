@@ -1,0 +1,334 @@
+---
+title: Uncertainty Estimation for High-dimensional Nonparametric Forecasting
+author: Nuwani Palihawadana
+date: 01 July 2025
+titlegraphic: bg-13.png
+titlecolor: white
+toc: false
+format:
+  presentation-beamer:
+    pdf-engine: pdflatex
+    keep-tex: true
+    fig-width: 8
+    fig-height: 4.3
+    template-partials:
+      - before-title.tex
+highlight-style: tango
+execute:
+  echo: false
+  message: false
+  warning: false
+  cache: false
+---
+
+```{r}
+#| label: load-packages
+#| echo: false
+library(knitr)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(tsibble)
+library(lubridate)
+library(cowplot)
+library(kableExtra)
+library(feasts)
+library(tikzDevice)
+library(shape)
+```
+
+## Nonparametric forecasting
+
+## Sparse multiple index (SMI) model
+
+## Benchmarks
+
+## Forecast uncertainty
+
+\begin{itemize}
+  \item Uncertainty of a forecast \alert{${\rightarrow}$ Prediction Interval (PI)}
+  \pause
+  \item Theoretical $100(1 - \alpha)\%$ prediction interval:
+$$
+  \hat{y}_{t+h|t} \pm z_{\alpha/2} \times \hat{\sigma}_{h},
+$$
+where
+  \begin{itemize}
+    \item \small \color{black} $y$ -- \color{violet} time series $y_{1}, \dots, y_{T}$
+    \item \small \color{black} $\hat{y}_{t+h|t}$ -- \color{violet} $h$-step-ahead point forecast for $y_{t+h}$ given observations up to $t$
+    \item \small \color{black} $z_{\alpha/2}$ -- \color{violet} $\alpha/2$ quantile of standard normal distribution
+    \item \small \color{black} $\hat{\sigma}_{h}$ -- \color{violet} estimate of std. deviation of $h$-step forecast distribution
+  \end{itemize}
+  \pause
+  \item Main issue:
+  \begin{itemize}
+    \item \small \color{blue} Difficult to analytically calculate $h$-step forecast variances for $h > 1$
+  \end{itemize}
+\end{itemize}
+
+
+## Block bootstrap
+
+\placefig{1.8}{2.5}{width=12cm}{bbsplit}
+
+## Conformal prediction
+
+\placefig{1.8}{2.5}{width=12cm}{cpsplit}
+
+## Conformal bootstrap
+
+
+<!-- ## Background -->
+
+<!-- \begin{block}{Block Bootstrap} -->
+<!-- \begin{itemize} -->
+<!--   \item Resampling from empirical distribution of historical model residuals \color{violet} $\mathbfit{\rightarrow}$ Bootstrapping \newline -->
+<!--   \pause -->
+<!--   \item \color{black} Randomly resample blocks from the historical model residuals, and join together \alert{$\mathbfit{\rightarrow}$ Block Bootstrapping}  -->
+<!--   \item Retains serial correlation in the data  -->
+<!--   \pause -->
+<!--   \item \color{violet} block length: -->
+<!--   \begin{itemize} -->
+<!--     \item Long enough to capture autocorrelation patterns -->
+<!--     \item Short enough to construct sufficient number of blocks -->
+<!--   \end{itemize} -->
+<!-- \end{itemize} -->
+<!-- \end{block} -->
+
+
+<!-- ## Background -->
+
+<!-- \begin{block}{\color{yellow} Conformal Prediction (CP) -- Vovk et al. (2005)} -->
+<!-- \begin{itemize} -->
+<!--   \item A distribution-free approach -->
+<!--   \item Relies only on the assumption of \textbf{exchangeability of data} -->
+<!--   \item Provides theoretical coverage guarantees -->
+<!-- \end{itemize} -->
+<!-- \end{block} -->
+
+<!-- \pause -->
+
+<!-- \begin{block}{Split Conformal Prediction (SCP)} -->
+<!-- \begin{itemize} -->
+<!--   \item A holdout method for generating prediction intervals -->
+<!--   \begin{itemize} -->
+<!--   \item \textbf{Training set} -- forecasting model is trained -->
+<!--   \item \textbf{Calibration set} -- forecasting errors (\textit{nonconformity scores}) are calculated -->
+<!--   \item \textbf{Test set} -- prediction intervals are obtained -->
+<!--   \end{itemize} -->
+<!-- \end{itemize} -->
+<!-- \end{block} -->
+
+
+<!-- ## Background -->
+
+<!-- \begin{itemize} -->
+<!--   \item \color{violet}CP methods for \textbf{non-exchangeable data}: -->
+<!-- \end{itemize} -->
+<!-- \pause -->
+<!-- \begin{block}{Weighted Conformal Prediction (WCP) Methods} -->
+<!-- \begin{itemize} -->
+<!--   \item \color{violet}Tibshirani et al. (2019): -->
+<!--   \begin{itemize} -->
+<!--     \item Depends on \textbf{"covariate shift"} assumption -->
+<!--     \item \textit{Nonconformity scores} are weighted using ratio of likelihoods of training and test covariate distributions -->
+<!--     \item Likelihood ratio is assumed to be known or accurately estimated -->
+<!--   \end{itemize} -->
+<!--   \pause -->
+<!--   \item \color{violet}Barber et al. (2023): -->
+<!--   \begin{itemize} -->
+<!--     \item Weighting \textit{quantiles} to avoid assumption of exchangeability -->
+<!--     \item Weights are "fixed" rather than being data dependent -->
+<!--   \end{itemize} -->
+<!-- \end{itemize} -->
+<!-- \end{block} -->
+
+
+<!-- ## Background -->
+
+<!-- \begin{itemize} -->
+<!--   \item \color{violet}CP methods for \textbf{non-exchangeable data}: -->
+<!-- \end{itemize} -->
+<!-- \begin{block}{Adaptive Conformal Prediction (ACP) -- Gibbs \& Candès (2021)} -->
+<!-- \begin{itemize} -->
+<!--   \item Update nominal $\mathbfit{\alpha}$ based on achieved coverage -->
+<!--   \begin{itemize} -->
+<!--     \item If achieved coverage is larger -- increase $\mathbfit{\alpha}$ -->
+<!--     \item If achieved coverage is smaller -- decrease $\mathbfit{\alpha}$ -->
+<!--   \end{itemize} -->
+<!-- \end{itemize} -->
+<!-- \end{block} -->
+
+
+<!-- ## Methodology -->
+
+<!-- \begin{block}{} -->
+<!--   \begin{itemize} -->
+<!--     \item Prediction interval construction methods -->
+<!--     \begin{itemize} -->
+<!--       \item Block Bootstrapping (BB) -->
+<!--       \item Conformal Prediction (CP) methods: SCP, WSCP, ACP \newline -->
+<!--     \end{itemize} -->
+<!--     \item Applied using \textit{\color{violet}online learning framework} proposed by \textit{\color{violet}Wang and Hyndman (2024)} \newline -->
+<!--   \end{itemize} -->
+<!-- \end{block} -->
+<!-- \pause -->
+<!-- \begin{block}{} -->
+<!--   \begin{itemize} -->
+<!--     \item We propose a novel methodology \alert{Conformal Block Bootstrap (CBB)} -->
+<!--     \begin{itemize} -->
+<!--       \item \textbf{\color{blue}A natural integration of BB and SCP} -->
+<!--       \item \textbf{\color{blue}Exploits the strengths of both the methods} -->
+<!--     \end{itemize} -->
+<!--   \end{itemize} -->
+<!-- \end{block} -->
+
+
+<!-- ## Methodology -->
+
+<!-- \fontsize{11}{12}\sf -->
+<!-- \begin{itemize}{} -->
+<!--   \item \textbf{\color{violet} Block Bootstrap (BB) with Time Series Cross-validation Forecasting} -->
+<!-- \end{itemize} -->
+<!-- \pause -->
+<!-- \begin{block}{} -->
+<!-- \fontsize{9}{9}\sf -->
+<!-- \color{blue} \textbf{Step 1 :} \color{black} Split data into an initial training window $\{\mathbfit{z}_{1}, \dots, \mathbfit{z}_{w}\}$ and test set $\{\mathbfit{z}_{w + 1}, \dots, \mathbfit{z}_{T}\}$ -->
+<!-- \end{block} -->
+<!-- \pause -->
+<!-- \begin{block}{} -->
+<!-- \fontsize{9}{9}\sf -->
+<!-- \color{violet} \textbf{Step 2 :} \color{black} Train forecasting model on training set -->
+<!-- \end{block} -->
+<!-- \pause -->
+<!-- \begin{block}{} -->
+<!-- \fontsize{9}{9}\sf -->
+<!-- \color{blue} \textbf{Step 3 :} \color{black} Obtain series of in-sample residuals $e_{1}, \dots, e_{w}$ -->
+<!-- \end{block} -->
+<!-- \pause -->
+<!-- \begin{block}{} -->
+<!-- \fontsize{9}{9}\sf -->
+<!-- \color{violet} \textbf{Step 4 :} \color{black} Perform BB by using residuals series; generate several bootstrapped series -->
+<!-- \end{block} -->
+<!-- \pause -->
+<!-- \begin{block}{} -->
+<!-- \fontsize{9}{9}\sf -->
+<!-- \color{blue} \textbf{Step 5 :} \color{black} Obtain $H$-step-ahead simulated future values, $\hat{y}_{w + 1 \mid w}, \dots, \hat{y}_{w + H \mid w}$, for each bootstrapped series -->
+<!-- \end{block} -->
+<!-- \pause -->
+<!-- \begin{block}{} -->
+<!-- \fontsize{9}{9}\sf -->
+<!-- \color{violet} \textbf{Step 6 :} \color{black} Calculate quantiles of the sets of simulated future values at each horizon -->
+<!-- \end{block} -->
+<!-- \pause -->
+<!-- \begin{block}{} -->
+<!-- \fontsize{9}{9}\sf -->
+<!-- \color{blue} \textbf{Step 7 :} \color{black} Iteratively roll training set forward by one observation; repeat steps 2-6 until prediction intervals have been constructed for the entire test set -->
+<!-- \end{block} -->
+
+
+
+
+
+
+## Forecasting heat exposure-related daily mortality
+
+```{r}
+#| label: heat-summer-plot
+#| echo: false
+#| message: false
+
+dataSummer <- readRDS(here::here("data/Heat_Corrected.rds"))
+dataSummer |>
+  as_tsibble(index = Date) |>
+  mutate(Day = row_number()) |>
+  update_tsibble(index = Day, regular = TRUE) |>
+  autoplot(Death_lag_000, colour = "#D55E00") +
+  scale_x_continuous(
+    breaks = seq(1, 2300, by = 92),
+    labels = unique(dataSummer$Year)
+  ) +
+  labs(x = "Date", y = "Number of Deaths", title = "Daily Deaths in Summer - Montreal, Canada") +
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 12, size = 7))
+```
+
+
+## Forecasting heat exposure-related daily mortality
+
+\begin{textblock}{7}(0.7, 1.5)
+\fontsize{11}{12}\sf
+\begin{block}{Data}
+  \begin{itemize}
+    \item \color{violet} \textbf{Response:} \color{black} \textbf{Daily deaths in Summer} -- 1990 to 2014 -- Montreal, Canada
+    \item \color{violet} \textbf{Index Variables:} 
+      \begin{itemize}
+        \item \color{black} Death lags
+        \item \color{black} Max temperature lags
+        \item \color{black} Min temperature lags
+        \item \color{black} Vapor pressure lags
+      \end{itemize}
+    \item \color{violet}\textbf{Nonlinear:} \color{black} DOS (day of the season), Year \newline
+  \end{itemize}
+\end{block}
+\end{textblock}
+
+## Forecasting heat exposure-related daily mortality
+
+\begin{textblock}{7}(0.7, 1.5)
+\fontsize{11}{12}\sf
+\begin{block}{Data}
+  \begin{itemize}
+    \item \color{violet} \textbf{Response:} \color{black} \textbf{Daily deaths in Summer} -- 1990 to 2014 -- Montreal, Canada
+    \item \color{violet} \textbf{Index Variables:} 
+      \begin{itemize}
+        \item \color{black} Death lags
+        \item \color{black} Max temperature lags
+        \item \color{black} Min temperature lags
+        \item \color{black} Vapor pressure lags
+      \end{itemize}
+    \item \color{violet}\textbf{Nonlinear:} \color{black} DOS (day of the season), Year \newline
+  \end{itemize}
+\end{block}
+\end{textblock}
+
+\begin{textblock}{7}(8.3, 1.5)
+\fontsize{11}{12}\sf
+\begin{block}{Data split}
+  \begin{itemize}
+  \item \color{violet}\textbf{Training Set:} \color{black}1990 to 2007 \newline
+  \item \color{violet}\textbf{Validation Set:} \color{black}2008 \newline
+  \item \color{violet}\textbf{Test Set:} \color{black}2009 to 2014 \newline \newline \newline \newline \newline \newline
+\end{itemize}
+\end{block}
+\end{textblock}
+
+
+## Conclusion
+
+::: {.callout-note}
+## \color{violet} Summary of Results (work-in-progress):
+
+\begin{itemize}
+    \item \textbf{Block Bootstrap} -- Under-coverage; too narrow
+    \item \textbf{Conformal Prediction} -- Better achieves a target coverage, with acceptable sharpness 
+  \end{itemize}
+:::
+
+::: {.callout-warning}
+## \color{violet} Limitations:
+
+\begin{itemize}
+    \item \small Test set is not long enough for larger forecast horizons
+    \item \small Hyper-parameter choices
+  \end{itemize}
+:::
+
+
+
+## 
+
+\placefig{1.8}{2.5}{width=12cm}{Findme}
+
+
+
