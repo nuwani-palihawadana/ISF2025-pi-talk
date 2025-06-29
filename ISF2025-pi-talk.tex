@@ -194,111 +194,31 @@ Forecasting}
 
 \begin{frame}{Nonparametric forecasting}
 \phantomsection\label{nonparametric-forecasting}
-\begin{block}{}
-$$
- y_t = f(\bm{a}_{t}, \bm{a}_{t-1}, \dots,\bm{a}_{t-s}, y_{t-1},\dots,y_{t-k}) + \varepsilon_{t},
-$$
-\end{block}
-
-\begin{itemize}
-  \item \small \color{black} $y_{t}$ -- \color{violet} observed response at time $t$
-  \item \small \color{black} $f$ -- \color{violet} arbitrary function
-  \item \small \color{black} $\bm{a}_{t}$ -- \color{violet} vector of exogenous variables at time $t$
-  \item \small \color{black} $\varepsilon_{t}$ -- \color{violet} stationary error with mean zero and constant variance $\sigma^2$. 
-\end{itemize}
-
-\pause
-
-We also define:
-
-\begin{itemize}
-  \item \small \color{black} $\bm{z}_{t} = (y_{t}, \bm{x}_{t})$ -- \color{violet} observation at time $t$
-  \item \small \color{black} $\bm{x}_{t} = (\bm{a}_{t}, \bm{a}_{t-1}, \dots,\bm{a}_{t-s}, y_{t-1},\dots,y_{t-k})$ -- \color{violet} vector of all predictors at time $t$.
-  \item \small \color{black} $\hat{y}_{t} = \hat{f}(\bm{x}_{t})$  -- \color{violet} estimated model
-  \item \small \color{black} $e_{t} = y_{t} - \hat{y}_{t}$  -- \color{violet} model residuals
-\end{itemize}
+\placefig{0.5}{1.4}{width=15cm}{nonpara1}
 \end{frame}
 
-\begin{frame}{Sparse multiple index (SMI) model}
+\begin{frame}{Nonparametric forecasting}
+\phantomsection\label{nonparametric-forecasting-1}
+\placefig{0.5}{1.3}{width=15cm}{nonpara2}
+\end{frame}
+
+\begin{frame}{Sparse Multiple Index (SMI) model}
 \phantomsection\label{sparse-multiple-index-smi-model}
-\begin{block}{}
-$$y_{i} = \beta_{0} + \sum_{j = 1}^{p}g_{j}(\bm{\alpha}_{j}^{T}\bm{x}_{ij}) + \sum_{k = 1}^{d}f_{k}(w_{ik}) + \bm{\theta}^{T}\bm{u}_{i} + \varepsilon_{i}, \quad i = 1, \dots, n,$$
-\end{block}
-
-\begin{itemize}
-  \item \small \color{black} $y_{i}$ -- \color{violet} univariate response
-  \item \small \color{black} $\bm{x}_{ij} \in \mathbb{R}^{\ell_{j}}$, $j = 1, \dots, p$ -- \color{violet} $p$ subsets of predictors entering indices
-  \item \small \color{black} $\bm{\alpha}_{j}$ -- \color{violet} $\ell_{j}$-dimensional vectors of index coefficients
-  \item \small \color{black} $g_{j}, f_{k}$ -- \color{violet} smooth nonlinear functions
-  \item \small \color{black} Additional predictors :
-    \begin{itemize}
-      \item \small $w_{ik}$  --   \color{violet} nonlinear
-      \item \small \color{black} $\bm{u}_{i}$  --   \color{violet} linear
-    \end{itemize}
-\end{itemize}
+\placefig{0.5}{1.5}{width=15cm}{smi1}
 \end{frame}
 
-\begin{frame}{Sparse multiple index (SMI) model}
+\begin{frame}{Sparse Multiple Index (SMI) model}
 \phantomsection\label{sparse-multiple-index-smi-model-1}
-\begin{block}{}
-$$y_{i} = \beta_{0} + \sum_{j = 1}^{p}g_{j}(\bm{\alpha}_{j}^{T}\bm{x}_{ij}) + \sum_{k = 1}^{d}f_{k}(w_{ik}) + \bm{\theta}^{T}\bm{u}_{i} + \varepsilon_{i}, \quad i = 1, \dots, n,$$
-\end{block}
-
-\begin{itemize}
-  \item \small \color{black} $y_{i}$ -- \color{violet} univariate response
-  \item \small \color{black} $\bm{x}_{ij} \in \mathbb{R}^{\ell_{j}}$, $j = 1, \dots, p$ -- \color{violet} $p$ subsets of predictors entering indices
-  \item \small \color{black} $\bm{\alpha}_{j}$ -- \color{violet} $\ell_{j}$-dimensional vectors of index coefficients
-  \item \small \color{black} $g_{j}, f_{k}$ -- \color{violet} smooth nonlinear functions
-  \item \small \color{black} Additional predictors :
-    \begin{itemize}
-      \item \small $w_{ik}$  --   \color{violet} nonlinear 
-      \item \small \color{black} $\bm{u}_{i}$  --   \color{violet} linear
-    \end{itemize}
-\end{itemize}
-
-\begin{textblock}{5.5}(9, 6.3)
-\fontsize{11}{12}\sf
-\begin{alertblock}{}
-\small Allow elements equal to zero in $\bm{\alpha}_{j}$ -- "Sparse"
-\end{alertblock}
-\end{textblock}
+\placefig{0.5}{1.5}{width=15cm}{smi2}
 \end{frame}
 
-\begin{frame}{Sparse multiple index (SMI) model}
+\begin{frame}{Sparse Multiple Index (SMI) model}
 \phantomsection\label{sparse-multiple-index-smi-model-2}
-\begin{block}{}
-$$y_{i} = \beta_{0} + \sum_{j = 1}^{p}g_{j}(\bm{\alpha}_{j}^{T}\bm{x}_{ij}) + \sum_{k = 1}^{d}f_{k}(w_{ik}) + \bm{\theta}^{T}\bm{u}_{i} + \varepsilon_{i}, \quad i = 1, \dots, n,$$
-\end{block}
-
-\begin{itemize}
-  \item \small \color{black} $y_{i}$ -- \color{violet} univariate response
-  \item \small \color{black} $\bm{x}_{ij} \in \mathbb{R}^{\ell_{j}}$, $j = 1, \dots, p$ -- \color{violet} $p$ subsets of predictors entering indices
-  \item \small \color{black} $\bm{\alpha}_{j}$ -- \color{violet} $\ell_{j}$-dimensional vectors of index coefficients
-  \item \small \color{black} $g_{j}, f_{k}$ -- \color{violet} smooth nonlinear functions
-  \item \small \color{black} Additional predictors :
-    \begin{itemize}
-      \item \small $w_{ik}$  --   \color{violet} nonlinear 
-      \item \small \color{black} $\bm{u}_{i}$  --   \color{violet} linear
-    \end{itemize}
-\end{itemize}
-
-\begin{textblock}{5.5}(9, 6)
-\fontsize{11}{12}\sf
-\begin{alertblock}{}
-\scriptsize Both "p" and the predictor grouping among indices are unknown.
-\end{alertblock}
-\end{textblock}
-
-\begin{textblock}{5.5}(9, 7)
-\fontsize{11}{12}\sf
-\begin{alertblock}{}
-\scriptsize Overlapping of predictors among indices is not allowed.
-\end{alertblock}
-\end{textblock}
+\placefig{0.5}{1.5}{width=15cm}{smi3}
 \end{frame}
 
-\begin{frame}{Benchmarks}
-\phantomsection\label{benchmarks}
+\begin{frame}{Other models}
+\phantomsection\label{other-models}
 \begin{itemize}
   \item \color{violet} Nonparametric additive model with backward elimination (Backward):
   \begin{itemize}
@@ -343,34 +263,228 @@ where
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Block bootstrap}
-\phantomsection\label{block-bootstrap}
+\begin{frame}{Block bootstrap (BB)}
+\phantomsection\label{block-bootstrap-bb}
+\alert{Block bootstrapping} \newline
+
 \begin{itemize}
-  \item Resampling from empirical distribution of historical model residuals \color{violet} ${\rightarrow}$ Bootstrapping \newline
-  \pause
-  \item \color{black} Randomly resample blocks from the historical model residuals, and join together \alert{${\rightarrow}$ Block Bootstrapping} 
-  \item Retains serial correlation in the data 
-  \pause
-  \item \color{violet} block length:
+   \item Randomly resample blocks from the historical model residuals, and join together \newline
+  \item Retains serial correlation in the data
+\end{itemize}
+\end{frame}
+
+\begin{frame}{BB with time series cross-validation Forecasting}
+\phantomsection\label{bb-with-time-series-cross-validation-forecasting}
+\begin{block}{}
+\fontsize{9}{9}\sf
+\color{blue} \textbf{Step 1 :} \color{black} Split the data into an initial training window, $\{\bm{z}_{1}, \dots, \bm{z}_{tr}\}$, and an initial test window, $\{\bm{z}_{tr + 1}, \dots, \bm{z}_{tr + H}\}$.
+\end{block}
+
+\begin{block}{}
+\fontsize{9}{9}\sf
+\color{violet} \textbf{Step 2 :} \color{black} Train forecasting model on training window.
+\end{block}
+
+\begin{block}{}
+\fontsize{9}{9}\sf
+\color{blue} \textbf{Step 3 :} \color{black} Obtain the series of in-sample residuals, $e_{1}, \dots, e_{tr}$.
+\end{block}
+
+\begin{block}{}
+\fontsize{9}{9}\sf
+\color{violet} \textbf{Step 4 :} \color{black} Perform BB by using residuals series; generate several bootstrapped series.
+\end{block}
+
+\begin{block}{}
+\fontsize{9}{9}\sf
+\color{blue} \textbf{Step 5 :} \color{black} Obtain $H$-step-ahead simulated future values, $\hat{y}_{tr + 1 \mid tr}, \dots, \hat{y}_{tr + H \mid tr}$, for each bootstrapped series.
+\end{block}
+
+\begin{block}{}
+\fontsize{9}{9}\sf
+\color{violet} \textbf{Step 6 :} \color{black} Calculate quantiles of the sets of simulated future values at each horizon.
+\end{block}
+
+\begin{block}{}
+\fontsize{9}{9}\sf
+\color{blue} \textbf{Step 7 :} \color{black} Iteratively roll training window forward by one observation; repeat steps 2--6 until prediction intervals have been constructed for the entire test set.
+\end{block}
+\end{frame}
+
+\begin{frame}{BB with time series cross-validation Forecasting}
+\phantomsection\label{bb-with-time-series-cross-validation-forecasting-1}
+\placefig{1}{2.5}{width=10cm}{bbsplit}
+
+\begin{textblock}{4}(11.5, 3)
+\fontsize{11}{12}\sf
+\begin{block}{}
   \begin{itemize}
-    \item Long enough to capture autocorrelation patterns
-    \item Short enough to construct sufficient number of blocks
+  \item \color{violet} {$tr$} : \color{black} length of training window \newline
+  \item \color{violet} {$H$} : \color{black} forecast horizon \newline
+\end{itemize}
+\end{block}
+\end{textblock}
+\end{frame}
+
+\begin{frame}{Conformal prediction (CP)}
+\phantomsection\label{conformal-prediction-cp}
+\alert{Conformal prediction} \newline
+
+\begin{itemize}
+  \item A distribution-free approach (Vovk et al. 2005) 
+  \item Relies only on the assumption of \textbf{exchangeability of data} 
+  \item Provides theoretical coverage guarantees \newline
+\end{itemize}
+\pause
+
+\color{violet}\textbf{Split Conformal Prediction (SCP) :}
+
+\begin{itemize}
+  \item A holdout method for generating prediction intervals
+  \begin{itemize}
+  \item \textbf{Training set} -- train forecasting model
+  \item \textbf{Calibration set} -- calculate forecast errors (\textit{nonconformity scores}) 
+  \item \textbf{Test set} -- obtain prediction intervals
   \end{itemize}
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Block bootstrap}
-\phantomsection\label{block-bootstrap-1}
-\placefig{1.8}{2.5}{width=12cm}{bbsplit}
+\begin{frame}{CP methods for non-exchangeable data}
+\phantomsection\label{cp-methods-for-non-exchangeable-data}
+\color{violet}\textbf{Weighted Split Conformal Prediction (WSCP) (Barber et al. 2023) :}
+
+\begin{itemize}
+  \item Weighting quantiles using fixed (data-independent) weights \newline
+\end{itemize}
+\pause
+
+\color{violet}\textbf{Adaptive Conformal Prediction (ACP) (Gibbs \& Candès 2021) :}
+
+\begin{itemize}
+  \item Update nominal $\bm{\alpha}$ based on achieved coverage
+\end{itemize}
 \end{frame}
 
-\begin{frame}{Conformal prediction}
-\phantomsection\label{conformal-prediction}
-\placefig{1.8}{2.5}{width=12cm}{cpsplit}
+\begin{frame}{CP with time series cross-validation Forecasting}
+\phantomsection\label{cp-with-time-series-cross-validation-forecasting}
+\begin{block}{}
+\fontsize{9}{9}\sf
+\color{blue} \textbf{Step 1 :} \color{black} Split data into an initial training window, $\{\bm{z}_{1}, \dots, \bm{z}_{tr}\}$, an initial calibration window, $\{\bm{z}_{tr + 1}, \dots, \bm{z}_{tr + tc}\}$, and an initial test window, $\{\bm{z}_{tr + tc + 1}, \dots, \bm{z}_{tr + tc + H}\}$.
+\end{block}
+
+\begin{block}{}
+\fontsize{9}{9}\sf
+\color{violet} \textbf{Step 2 :} \color{black} Estimate forecasting model on initial training window. Obtain $H$-step-ahead forecasts, $\hat{y}_{tr + h \mid tr}$, and forecast errors $s_{tr + h \mid tr} = y_{tr + h} - \hat{y}_{tr + h \mid tr}$, for $h = 1, \dots, H$.
+\end{block}
+
+\begin{block}{}
+\fontsize{9}{9}\sf
+\color{blue} \textbf{Step 3 :} \color{black} Perform cross-validation forecasting, while repeating step 2, until forecast errors are obtained for entire initial calibration window.
+\end{block}
+
+\begin{block}{}
+\fontsize{9}{9}\sf
+\color{violet} \textbf{Step 4 :} \color{black} Apply the conformal prediction method of interest: SCP, WSCP, or ACP, to compute $H$-step prediction intervals.
+\end{block}
+
+\begin{block}{}
+\fontsize{9}{9}\sf
+\color{blue} \textbf{Step 5 :} \color{black} Iteratively roll training window and calibration window forward by one observation; repeat steps 2--4 until prediction intervals are obtained for the entire test set. 
+\end{block}
 \end{frame}
 
-\begin{frame}{Conformal bootstrap}
-\phantomsection\label{conformal-bootstrap}
+\begin{frame}{CP with time series cross-validation Forecasting}
+\phantomsection\label{cp-with-time-series-cross-validation-forecasting-1}
+\placefig{1}{2.5}{width=10cm}{cpsplit}
+
+\begin{textblock}{4}(11.5, 2.2)
+\fontsize{11}{12}\sf
+\begin{block}{}
+  \begin{itemize}
+  \item \color{violet} {$tr$} : \color{black} length of training window \newline
+  \item \color{violet} {$tc$} : \color{black} length of calibration window \newline
+  \item \color{violet} {$H$} : \color{black} forecast horizon \newline
+\end{itemize}
+\end{block}
+\end{textblock}
+\end{frame}
+
+\begin{frame}{Conformal bootstrap (CB)}
+\phantomsection\label{conformal-bootstrap-cb}
+\alert{Conformal bootstrap}
+
+\begin{itemize}
+  \item \textbf{A natural integration of BB and SCP} \newline
+  \pause
+  \item \textbf{Exploits the strengths of both the methods} \newline
+  \begin{itemize}
+  \item \color{violet} Preserves temporal dependencies inherent in multi-step forecasts \newline
+  \item \color{violet} Accounts for additional uncertainty brought into the process by ex-ante forecasting
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{CB with time series cross-validation Forecasting}
+\phantomsection\label{cb-with-time-series-cross-validation-forecasting}
+\placefig{1}{2.5}{width=10cm}{cpsplit}
+
+\begin{textblock}{4}(11.5, 2.2)
+\fontsize{11}{12}\sf
+\begin{block}{}
+  \begin{itemize}
+  \item \color{violet} {$tr$} : \color{black} length of training window \newline
+  \item \color{violet} {$tc$} : \color{black} length of calibration window \newline
+  \item \color{violet} {$H$} : \color{black} forecast horizon \newline
+\end{itemize}
+\end{block}
+\end{textblock}
+\end{frame}
+
+\begin{frame}{CB with time series cross-validation Forecasting}
+\phantomsection\label{cb-with-time-series-cross-validation-forecasting-1}
+\begin{block}{}
+\fontsize{9}{9}\sf
+\color{blue} \textbf{Step 1 :} \color{black} Split data into an initial training window, $\{\bm{z}_{1}, \dots, \bm{z}_{tr}\}$, an initial calibration window, $\{\bm{z}_{tr + 1}, \dots, \bm{z}_{tr + tc}\}$, and an initial test window, $\{\bm{z}_{tr + tc + 1}, \dots, \bm{z}_{tr + tc + H}\}$.
+\end{block}
+
+\pause
+
+\begin{block}{}
+\fontsize{9}{9}\sf
+\color{violet} \textbf{Step 2 :} \color{black} Estimate forecasting model on initial training window. Obtain $H$-step-ahead forecasts, $\hat{y}_{tr + h \mid tr}$, and forecast errors $s_{tr + h \mid tr} = y_{tr + h} - \hat{y}_{tr + h \mid tr}$, for $h = 1, \dots, H$.
+\end{block}
+
+\pause
+
+\begin{block}{}
+\fontsize{9}{9}\sf
+\color{blue} \textbf{Step 3 :} \color{black} Perform cross-validation forecasting, while repeating step 2, until forecast errors are obtained for entire initial calibration window.
+\end{block}
+
+\pause
+
+\begin{block}{}
+\fontsize{9}{9}\sf
+\color{violet} \textbf{Step 4 :} \color{black} Use the model estimated on the most recent training window to generate $H$-step-ahead simulated future values.
+\begin{itemize}
+  \item Autoregressive: block bootstrap 1-step forecast errors; block size $ = H$.
+  \item Non-autoregressive: bootstrap multi-step forecast errors at each time point as a whole.
+\end{itemize}
+\end{block}
+
+\pause
+
+\begin{block}{}
+\fontsize{9}{9}\sf
+\color{blue} \textbf{Step 5 :} \color{black} Calculate quantiles of the sets of simulated future values at each horizon.
+\end{block}
+
+\pause
+
+\begin{block}{}
+\fontsize{9}{9}\sf
+\color{violet} \textbf{Step 6 :} \color{black} Iteratively roll training window forward by one observation; repeat steps 2--5 until prediction intervals have been constructed for the entire test set. 
+\end{block}
 \end{frame}
 
 \begin{frame}{Forecasting heat exposure-related daily mortality}
@@ -421,41 +535,43 @@ where
 \fontsize{11}{12}\sf
 \begin{block}{Data split}
   \begin{itemize}
-  \item \color{violet}\textbf{Training Set:} \color{black}1990 to 2007 \newline
-  \item \color{violet}\textbf{Validation Set:} \color{black}2008 \newline
-  \item \color{violet}\textbf{Test Set:} \color{black}2009 to 2014 \newline \newline \newline \newline \newline \newline
+  \item \color{violet} {$\bm{tr}$ - training window} : \color{black} 1748 \newline
+  \item \color{violet} {$\bm{tc}$ - calibration window} : \color{black} 300 \newline
+  \item \color{violet} {$\bm{H}$ - forecast horizon} : \color{black} 92 \newline \newline \newline \newline \newline
 \end{itemize}
 \end{block}
 \end{textblock}
 \end{frame}
 
-\begin{frame}{Mean coverage}
-\phantomsection\label{mean-coverage}
+\begin{frame}{Mean coverage of \(95\%\) prediction intervals}
+\phantomsection\label{mean-coverage-of-95-prediction-intervals}
 \includegraphics{ISF2025-pi-talk_files/figure-beamer/unnamed-chunk-1-1.pdf}
 \end{frame}
 
-\begin{frame}{Mean width}
-\phantomsection\label{mean-width}
+\begin{frame}{Mean width of \(95\%\) prediction intervals}
+\phantomsection\label{mean-width-of-95-prediction-intervals}
 \includegraphics{ISF2025-pi-talk_files/figure-beamer/unnamed-chunk-2-1.pdf}
 \end{frame}
 
 \begin{frame}{Conclusion}
 \phantomsection\label{conclusion}
-\begin{tcolorbox}[enhanced jigsaw, coltitle=black, colbacktitle=quarto-callout-note-color!10!white, toprule=.15mm, breakable, bottomtitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{\color{violet} Summary of Results (work-in-progress):}, left=2mm, opacitybacktitle=0.6, rightrule=.15mm, colback=white, toptitle=1mm, arc=.35mm, leftrule=.75mm, bottomrule=.15mm, colframe=quarto-callout-note-color-frame, opacityback=0, titlerule=0mm]
+\begin{tcolorbox}[enhanced jigsaw, colback=white, colframe=quarto-callout-note-color-frame, breakable, titlerule=0mm, toprule=.15mm, leftrule=.75mm, opacitybacktitle=0.6, bottomtitle=1mm, left=2mm, bottomrule=.15mm, opacityback=0, toptitle=1mm, arc=.35mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{\color{blue} Summary of results:}, coltitle=black, rightrule=.15mm, colbacktitle=quarto-callout-note-color!10!white]
 
 \begin{itemize}
-    \item \textbf{Block Bootstrap} -- Under-coverage; too narrow
-    \item \textbf{Conformal Prediction} -- Better achieves a target coverage, with acceptable sharpness 
-  \end{itemize}
-
-\end{tcolorbox}
-
-\begin{tcolorbox}[enhanced jigsaw, coltitle=black, colbacktitle=quarto-callout-warning-color!10!white, toprule=.15mm, breakable, bottomtitle=1mm, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{\color{violet} Limitations:}, left=2mm, opacitybacktitle=0.6, rightrule=.15mm, colback=white, toptitle=1mm, arc=.35mm, leftrule=.75mm, bottomrule=.15mm, colframe=quarto-callout-warning-color-frame, opacityback=0, titlerule=0mm]
-
-\begin{itemize}
-    \item \small Test set is not long enough for larger forecast horizons
-    \item \small Hyper-parameter choices
-  \end{itemize}
+    \item \textbf{\color{violet} Block bootstrap} prediction intervals were \textbf{narrow} and resulted in \textbf{under-coverage}
+    \pause
+    \item \textbf{\color{violet} Conformal prediction} methods \textbf{generally performed well} across models and forecast horizons
+    \pause
+    \item \textbf{\color{violet} Conformal bootstrap} method \textbf{performed well in shorter horizons}; performance decreased in longer horizons
+    \begin{itemize}
+      \pause
+      \item \color{brown} Using only 1-step errors
+      \pause
+      \item \color{brown} Predictor truncation when simulating sample paths
+    \end{itemize}
+    \pause
+    \item \textbf{\color{violet}Coverage performance} is influenced by: \textbf{data characteristics, forecasting model}, and \textbf{forecast horizon}
+\end{itemize}
 
 \end{tcolorbox}
 \end{frame}
