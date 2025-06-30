@@ -38,11 +38,6 @@ library(patchwork)
 
 ## Nonparametric model
 
-\placefig{0.5}{1.4}{width=15cm}{nonpara1}
-
-
-## Nonparametric model
-
 \placefig{0.5}{1.3}{width=15cm}{nonpara2}
 
 
@@ -350,24 +345,24 @@ dataSummer |>
 ```
 
 
-## Forecasting heat exposure-related daily mortality
+<!-- ## Forecasting heat exposure-related daily mortality -->
 
-\begin{textblock}{7}(0.7, 1.5)
-\fontsize{11}{12}\sf
-\begin{block}{Data}
-  \begin{itemize}
-    \item \color{violet} \textbf{Response:} \color{black} \textbf{Daily deaths in Summer} -- 1990 to 2014 -- Montreal, Canada
-    \item \color{violet} \textbf{Index Variables:} 
-      \begin{itemize}
-        \item \color{black} Death lags
-        \item \color{black} Max temperature lags
-        \item \color{black} Min temperature lags
-        \item \color{black} Vapor pressure lags
-      \end{itemize}
-    \item \color{violet}\textbf{Nonlinear:} \color{black} DOS (day of the season), Year \newline
-  \end{itemize}
-\end{block}
-\end{textblock}
+<!-- \begin{textblock}{7}(0.7, 1.5) -->
+<!-- \fontsize{11}{12}\sf -->
+<!-- \begin{block}{Data} -->
+<!--   \begin{itemize} -->
+<!--     \item \color{violet} \textbf{Response:} \color{black} \textbf{Daily deaths in Summer} -- 1990 to 2014 -- Montreal, Canada -->
+<!--     \item \color{violet} \textbf{Index Variables:}  -->
+<!--       \begin{itemize} -->
+<!--         \item \color{black} Death lags -->
+<!--         \item \color{black} Max temperature lags -->
+<!--         \item \color{black} Min temperature lags -->
+<!--         \item \color{black} Vapor pressure lags -->
+<!--       \end{itemize} -->
+<!--     \item \color{violet}\textbf{Nonlinear:} \color{black} DOS (day of the season), Year \newline -->
+<!--   \end{itemize} -->
+<!-- \end{block} -->
+<!-- \end{textblock} -->
 
 ## Forecasting heat exposure-related daily mortality
 
