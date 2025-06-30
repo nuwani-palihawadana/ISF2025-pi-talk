@@ -90,22 +90,6 @@
 \usepackage{makecell}
 \usepackage{xcolor}
 \makeatletter
-\@ifpackageloaded{tcolorbox}{}{\usepackage[skins,breakable]{tcolorbox}}
-\@ifpackageloaded{fontawesome5}{}{\usepackage{fontawesome5}}
-\definecolor{quarto-callout-color}{HTML}{909090}
-\definecolor{quarto-callout-note-color}{HTML}{0758E5}
-\definecolor{quarto-callout-important-color}{HTML}{CC1914}
-\definecolor{quarto-callout-warning-color}{HTML}{EB9113}
-\definecolor{quarto-callout-tip-color}{HTML}{00A047}
-\definecolor{quarto-callout-caution-color}{HTML}{FC5300}
-\definecolor{quarto-callout-color-frame}{HTML}{acacac}
-\definecolor{quarto-callout-note-color-frame}{HTML}{4582ec}
-\definecolor{quarto-callout-important-color-frame}{HTML}{d9534f}
-\definecolor{quarto-callout-warning-color-frame}{HTML}{f0ad4e}
-\definecolor{quarto-callout-tip-color-frame}{HTML}{02b875}
-\definecolor{quarto-callout-caution-color-frame}{HTML}{fd7e14}
-\makeatother
-\makeatletter
 \@ifpackageloaded{caption}{}{\usepackage{caption}}
 \AtBeginDocument{%
 \ifdefined\contentsname
@@ -192,13 +176,13 @@ Forecasting}
 \frame{\titlepage}
 
 
-\begin{frame}{Nonparametric forecasting}
-\phantomsection\label{nonparametric-forecasting}
+\begin{frame}{Nonparametric model}
+\phantomsection\label{nonparametric-model}
 \placefig{0.5}{1.4}{width=15cm}{nonpara1}
 \end{frame}
 
-\begin{frame}{Nonparametric forecasting}
-\phantomsection\label{nonparametric-forecasting-1}
+\begin{frame}{Nonparametric model}
+\phantomsection\label{nonparametric-model-1}
 \placefig{0.5}{1.3}{width=15cm}{nonpara2}
 \end{frame}
 
@@ -273,8 +257,23 @@ where
 \end{itemize}
 \end{frame}
 
-\begin{frame}{BB with time series cross-validation Forecasting}
-\phantomsection\label{bb-with-time-series-cross-validation-forecasting}
+\begin{frame}{BB with time series cross-validation}
+\phantomsection\label{bb-with-time-series-cross-validation}
+\placefig{1}{2.5}{width=10cm}{bbsplit}
+
+\begin{textblock}{4}(11.5, 3)
+\fontsize{11}{12}\sf
+\begin{block}{}
+  \begin{itemize}
+  \item \color{violet} {$tr$} : \color{black} length of training window \newline
+  \item \color{violet} {$H$} : \color{black} forecast horizon \newline
+\end{itemize}
+\end{block}
+\end{textblock}
+\end{frame}
+
+\begin{frame}{BB with time series cross-validation}
+\phantomsection\label{bb-with-time-series-cross-validation-1}
 \begin{block}{}
 \fontsize{9}{9}\sf
 \color{blue} \textbf{Step 1 :} \color{black} Split the data into an initial training window, $\{\bm{z}_{1}, \dots, \bm{z}_{tr}\}$, and an initial test window, $\{\bm{z}_{tr + 1}, \dots, \bm{z}_{tr + H}\}$.
@@ -309,21 +308,6 @@ where
 \fontsize{9}{9}\sf
 \color{blue} \textbf{Step 7 :} \color{black} Iteratively roll training window forward by one observation; repeat steps 2--6 until prediction intervals have been constructed for the entire test set.
 \end{block}
-\end{frame}
-
-\begin{frame}{BB with time series cross-validation Forecasting}
-\phantomsection\label{bb-with-time-series-cross-validation-forecasting-1}
-\placefig{1}{2.5}{width=10cm}{bbsplit}
-
-\begin{textblock}{4}(11.5, 3)
-\fontsize{11}{12}\sf
-\begin{block}{}
-  \begin{itemize}
-  \item \color{violet} {$tr$} : \color{black} length of training window \newline
-  \item \color{violet} {$H$} : \color{black} forecast horizon \newline
-\end{itemize}
-\end{block}
-\end{textblock}
 \end{frame}
 
 \begin{frame}{Conformal prediction (CP)}
@@ -365,8 +349,26 @@ where
 \end{itemize}
 \end{frame}
 
-\begin{frame}{CP with time series cross-validation Forecasting}
-\phantomsection\label{cp-with-time-series-cross-validation-forecasting}
+\begin{frame}{CP with time series cross-validation (Wang \& Hyndman
+2024)}
+\phantomsection\label{cp-with-time-series-cross-validation-wang-hyndman-2024}
+\placefig{1}{2.5}{width=10cm}{cpsplit}
+
+\begin{textblock}{4}(11.5, 2.2)
+\fontsize{11}{12}\sf
+\begin{block}{}
+  \begin{itemize}
+  \item \color{violet} {$tr$} : \color{black} length of training window \newline
+  \item \color{violet} {$tc$} : \color{black} length of calibration window \newline
+  \item \color{violet} {$H$} : \color{black} forecast horizon \newline
+\end{itemize}
+\end{block}
+\end{textblock}
+\end{frame}
+
+\begin{frame}{CP with time series cross-validation (Wang \& Hyndman
+2024)}
+\phantomsection\label{cp-with-time-series-cross-validation-wang-hyndman-2024-1}
 \begin{block}{}
 \fontsize{9}{9}\sf
 \color{blue} \textbf{Step 1 :} \color{black} Split data into an initial training window, $\{\bm{z}_{1}, \dots, \bm{z}_{tr}\}$, an initial calibration window, $\{\bm{z}_{tr + 1}, \dots, \bm{z}_{tr + tc}\}$, and an initial test window, $\{\bm{z}_{tr + tc + 1}, \dots, \bm{z}_{tr + tc + H}\}$.
@@ -393,39 +395,22 @@ where
 \end{block}
 \end{frame}
 
-\begin{frame}{CP with time series cross-validation Forecasting}
-\phantomsection\label{cp-with-time-series-cross-validation-forecasting-1}
-\placefig{1}{2.5}{width=10cm}{cpsplit}
-
-\begin{textblock}{4}(11.5, 2.2)
-\fontsize{11}{12}\sf
-\begin{block}{}
-  \begin{itemize}
-  \item \color{violet} {$tr$} : \color{black} length of training window \newline
-  \item \color{violet} {$tc$} : \color{black} length of calibration window \newline
-  \item \color{violet} {$H$} : \color{black} forecast horizon \newline
-\end{itemize}
-\end{block}
-\end{textblock}
-\end{frame}
-
 \begin{frame}{Conformal bootstrap (CB)}
 \phantomsection\label{conformal-bootstrap-cb}
 \alert{Conformal bootstrap}
 
 \begin{itemize}
   \item \textbf{A natural integration of BB and SCP} \newline
-  \pause
   \item \textbf{Exploits the strengths of both the methods} \newline
   \begin{itemize}
-  \item \color{violet} Preserves temporal dependencies inherent in multi-step forecasts \newline
+  \item \color{violet} Preserves temporal dependencies  \newline
   \item \color{violet} Accounts for additional uncertainty brought into the process by ex-ante forecasting
 \end{itemize}
 \end{itemize}
 \end{frame}
 
-\begin{frame}{CB with time series cross-validation Forecasting}
-\phantomsection\label{cb-with-time-series-cross-validation-forecasting}
+\begin{frame}{CB with time series cross-validation}
+\phantomsection\label{cb-with-time-series-cross-validation}
 \placefig{1}{2.5}{width=10cm}{cpsplit}
 
 \begin{textblock}{4}(11.5, 2.2)
@@ -440,28 +425,22 @@ where
 \end{textblock}
 \end{frame}
 
-\begin{frame}{CB with time series cross-validation Forecasting}
-\phantomsection\label{cb-with-time-series-cross-validation-forecasting-1}
+\begin{frame}{CB with time series cross-validation}
+\phantomsection\label{cb-with-time-series-cross-validation-1}
 \begin{block}{}
 \fontsize{9}{9}\sf
 \color{blue} \textbf{Step 1 :} \color{black} Split data into an initial training window, $\{\bm{z}_{1}, \dots, \bm{z}_{tr}\}$, an initial calibration window, $\{\bm{z}_{tr + 1}, \dots, \bm{z}_{tr + tc}\}$, and an initial test window, $\{\bm{z}_{tr + tc + 1}, \dots, \bm{z}_{tr + tc + H}\}$.
 \end{block}
-
-\pause
 
 \begin{block}{}
 \fontsize{9}{9}\sf
 \color{violet} \textbf{Step 2 :} \color{black} Estimate forecasting model on initial training window. Obtain $H$-step-ahead forecasts, $\hat{y}_{tr + h \mid tr}$, and forecast errors $s_{tr + h \mid tr} = y_{tr + h} - \hat{y}_{tr + h \mid tr}$, for $h = 1, \dots, H$.
 \end{block}
 
-\pause
-
 \begin{block}{}
 \fontsize{9}{9}\sf
 \color{blue} \textbf{Step 3 :} \color{black} Perform cross-validation forecasting, while repeating step 2, until forecast errors are obtained for entire initial calibration window.
 \end{block}
-
-\pause
 
 \begin{block}{}
 \fontsize{9}{9}\sf
@@ -472,14 +451,10 @@ where
 \end{itemize}
 \end{block}
 
-\pause
-
 \begin{block}{}
 \fontsize{9}{9}\sf
 \color{blue} \textbf{Step 5 :} \color{black} Calculate quantiles of the sets of simulated future values at each horizon.
 \end{block}
-
-\pause
 
 \begin{block}{}
 \fontsize{9}{9}\sf
@@ -553,10 +528,8 @@ where
 \includegraphics{ISF2025-pi-talk_files/figure-beamer/unnamed-chunk-2-1.pdf}
 \end{frame}
 
-\begin{frame}{Conclusion}
-\phantomsection\label{conclusion}
-\begin{tcolorbox}[enhanced jigsaw, colback=white, colframe=quarto-callout-note-color-frame, breakable, titlerule=0mm, toprule=.15mm, leftrule=.75mm, opacitybacktitle=0.6, bottomtitle=1mm, left=2mm, bottomrule=.15mm, opacityback=0, toptitle=1mm, arc=.35mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{\color{blue} Summary of results:}, coltitle=black, rightrule=.15mm, colbacktitle=quarto-callout-note-color!10!white]
-
+\begin{frame}{Summary}
+\phantomsection\label{summary}
 \begin{itemize}
     \item \textbf{\color{violet} Block bootstrap} prediction intervals were \textbf{narrow} and resulted in \textbf{under-coverage}
     \pause
@@ -564,20 +537,16 @@ where
     \pause
     \item \textbf{\color{violet} Conformal bootstrap} method \textbf{performed well in shorter horizons}; performance decreased in longer horizons
     \begin{itemize}
-      \pause
       \item \color{brown} Using only 1-step errors
-      \pause
       \item \color{brown} Predictor truncation when simulating sample paths
     \end{itemize}
     \pause
     \item \textbf{\color{violet}Coverage performance} is influenced by: \textbf{data characteristics, forecasting model}, and \textbf{forecast horizon}
 \end{itemize}
-
-\end{tcolorbox}
 \end{frame}
 
-\begin{frame}{R Package - smimodel}
-\phantomsection\label{r-package---smimodel}
+\begin{frame}{Open-source implementation}
+\phantomsection\label{open-source-implementation}
 \placefig{11.7}{2.2}{width=4cm}{hex-large}
 
 \begin{textblock}{10.2}(1, 2.2)
@@ -607,6 +576,16 @@ where
 \begin{frame}{}
 \phantomsection\label{section}
 \placefig{1.8}{2.5}{width=12cm}{Findme}
+\end{frame}
+
+\begin{frame}{References}
+\phantomsection\label{references}
+\begin{itemize}
+    \item Barber, RF, EJ Candès, A Ramdas \& RJ Tibshirani (2023). Conformal Prediction Beyond Exchangeability. \textit{The Annals of Statistics} 51(2), 816–845.
+    \item Gibbs, I \& E Candès (2021). Adaptive Conformal Inference Under Distribution Shift. \textit{Advances in Neural Information Processing Systems}, 1660–1672.
+    \item Vovk, V, A Gammerman \& G Shafer (2005). \textit{Algorithmic Learning in a Random World}. New York, NY: Springer.
+    \item Wang, X \& RJ Hyndman (2024). Online Conformal Inference for Multi-Step Time Series Forecasting. \textit{arXiv preprint arXiv:2410.13115}.
+\end{itemize}
 \end{frame}
 
 
